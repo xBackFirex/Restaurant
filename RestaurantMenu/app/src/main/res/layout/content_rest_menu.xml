@@ -147,6 +147,12 @@
         <Button
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:text="@string/btnUpdate"
+            android:id="@+id/btnUpdate"/>
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:text="@string/btnDelete"
             android:id="@+id/btnDelete"/>
 
