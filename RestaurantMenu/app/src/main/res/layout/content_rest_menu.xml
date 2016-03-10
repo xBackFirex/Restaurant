@@ -56,7 +56,9 @@
                     android:hint="@string/errNA"
                     android:editable="false"
                     android:enabled="false"
-                    android:inputType="none"/>
+                    android:inputType="none"
+                    android:maxWidth="200dp"
+                    android:minWidth="200dp"/>
             </TableRow>
 
             <TableRow
@@ -70,11 +72,15 @@
                     android:id="@+id/txtItemCat"
                     android:layout_gravity="center_vertical|right"/>
 
-                <EditText
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/itemCat"
-                    android:hint="@string/errNA"/>
+                    android:entries="@array/grpCategory"
+                    android:spinnerMode="dialog"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"/>
+
             </TableRow>
 
             <TableRow
@@ -93,7 +99,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/itemName"
-                    android:hint="@string/errNA"/>
+                    android:hint="@string/errNA"
+                    android:maxWidth="200dp"
+                    android:minWidth="200dp"/>
             </TableRow>
 
             <TableRow
@@ -113,7 +121,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/itemPrice"
-                    android:hint="@string/errNA"/>
+                    android:hint="@string/errNA"
+                    android:minWidth="200dp"
+                    android:maxWidth="200dp"/>
             </TableRow>
 
         </TableLayout>

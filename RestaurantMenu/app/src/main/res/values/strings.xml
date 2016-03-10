@@ -26,4 +26,14 @@
     <string name="btnFind">Find</string>
     <string name="btnDelete">Delete</string>
     <string name="btnUpdate">Update</string>
+
+    <!-- DROP DOWN - CATEGORY - DECLARATIONS -->
+    <string-array name="grpCategory">
+        <item>@string/errNA</item>
+        <item>Appetizers</item>
+        <item>Entrees</item>
+        <item>Sides</item>
+        <item>Desserts</item>
+        <item>Drinks</item>
+    </string-array>
 </resources>
