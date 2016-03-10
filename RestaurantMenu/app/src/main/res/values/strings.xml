@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Restaurant Menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="txtItemID">Item ID:</string>
+    <string name="txtItemName">Item Name:</string>
+    <string name="txtItemPrice">Item Price ($):</string>
+    <string name="txtItemDesc">Item Description:</string>
+    <string name="txtTitle">Restaurant Menu</string>
+    <string name="txtEntryDem">Please enter one valid search term.</string>
+    <string name="errNMF">No Match Found</string>
+    <string name="errNA">Not Assigned</string>
+    <string name="notRecAdd">Record Added</string>
+    <string name="notRecDel">Record Deleted</string>
+    <string name="notRecUpd">Record Updated</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnFind">Find</string>
+    <string name="btnDelete">Delete</string>
+    <string name="btnUpdate">Update</string>
+    <string name="txtItemCat">Item Category:</string>
+</resources>
