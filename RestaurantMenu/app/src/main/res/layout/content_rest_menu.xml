@@ -145,26 +145,28 @@
             android:layout_height="wrap_content"
             android:text="@string/btnAdd"
             android:id="@+id/btnAdd"
-            />
+            android:onClick="addItem" />
 
         <Button
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/btnFind"
             android:id="@+id/btnFind"
-            />
+            android:onClick="findItem" />
 
         <Button
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/btnUpdate"
-            android:id="@+id/btnUpdate"/>
+            android:id="@+id/btnUpdate"
+            android:onClick="updateItem" />
 
         <Button
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/btnDelete"
-            android:id="@+id/btnDelete"/>
+            android:id="@+id/btnDelete"
+            android:onClick="deleteItem" />
 
     </LinearLayout>
 

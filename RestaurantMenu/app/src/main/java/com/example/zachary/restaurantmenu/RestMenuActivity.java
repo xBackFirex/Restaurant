@@ -8,9 +8,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class RestMenuActivity extends AppCompatActivity
 {
+	// Get input
+	EditText itemID;
+	Spinner itemCat;
+	EditText itemName;
+	EditText itemPrice;
+	EditText itemDesc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -20,18 +29,92 @@ public class RestMenuActivity extends AppCompatActivity
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		/*
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener()
+		// Set values
+		itemID = (EditText) findViewById(R.id.itemID);
+		itemCat = (Spinner) findViewById(R.id.itemCat);
+		itemName = (EditText) findViewById(R.id.itemName);
+		itemPrice = (EditText) findViewById(R.id.itemPrice);
+		itemDesc = (EditText) findViewById(R.id.itemDesc);
+	}
+
+	public void addItem (View view)
+	{
+		RestDBHandler dbHandler = new RestDBHandler(this, null, null, 1);
+
+		String itemCatSelected = itemCat.getSelectedItem().toString();
+		double price = Double.parseDouble(itemPrice.getText().toString());
+
+		if (itemCatSelected == null || itemPrice.getText().toString() == null || itemName.getText().toString() == null || itemDesc.getText().toString() == null)
 		{
-			@Override
-			public void onClick(View view)
+			Toast.makeText(RestMenuActivity.this, "Please enter values for all fields", Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			RestMenuItem restmenuitem = new RestMenuItem(
+					itemCatSelected,
+					itemName.getText().toString(),
+					price,
+					itemDesc.getText().toString());
+
+			dbHandler.addItem(restmenuitem);
+			itemID.setText(R.string.notRecAdd);
+			itemCat.setSelection(0);
+			itemName.setText("");
+			itemPrice.setText("");
+			itemDesc.setText("");
+		}
+	}
+
+	public void findItem (View view)
+	{
+		RestDBHandler dbHandler = new RestDBHandler(this, null, null, 1);
+
+		RestMenuItem restmenuitem = dbHandler.findItem(itemName.getText().toString());
+
+		if (restmenuitem != null)
+		{
+			itemID.setText(String.valueOf(restmenuitem.get_prodID()));
+
+			itemName.setText(String.valueOf(restmenuitem.get_prodName()));
+			itemPrice.setText(String.valueOf(restmenuitem.get_prodPrice()));
+			itemDesc.setText(String.valueOf(restmenuitem.get_prodDesc()));
+
+			switch (String.valueOf(restmenuitem.get_prodCat()))
 			{
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
+				case "Appetizers":
+					itemCat.setSelection(1);
+					break;
+				case "Entrees":
+					itemCat.setSelection(2);
+					break;
+				case "Sides":
+					itemCat.setSelection(3);
+					break;
+				case "Desserts":
+					itemCat.setSelection(4);
+					break;
+				case "Drinks":
+					itemCat.setSelection(5);
+					break;
+				default:
+					itemCat.setSelection(0);
+					break;
 			}
-		});
-		*/
+		}
+		else
+		{
+			Toast.makeText(RestMenuActivity.this, R.string.errNMF, Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public void updateItem (View view)
+	{
+
+	}
+
+	public void deleteItem (View view)
+	{
+
 	}
 
 	@Override
@@ -45,9 +128,7 @@ public class RestMenuActivity extends AppCompatActivity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+		// Handle action bar item clicks here.
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement

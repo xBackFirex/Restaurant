@@ -4,7 +4,7 @@ package com.example.zachary.restaurantmenu;
  * Created by Zachary on 3/9/2016.
  * Project: RestaurantMenu
  */
-public class MenuItem
+public class RestMenuItem
 {
 	private int _prodID;
 	private String _prodCat;
@@ -12,11 +12,19 @@ public class MenuItem
 	private double _prodPrice;
 	private String _prodDesc;
 
-	public MenuItem()
+	public RestMenuItem()
 	{
 	}
 
-	public MenuItem(int _prodID, String _prodCat, String _prodName, double _prodPrice, String _prodDesc)
+	public RestMenuItem(String _prodCat, String _prodName, double _prodPrice, String _prodDesc)
+	{
+		this._prodCat = _prodCat;
+		this._prodName = _prodName;
+		this._prodPrice = _prodPrice;
+		this._prodDesc = _prodDesc;
+	}
+
+	public RestMenuItem(int _prodID, String _prodCat, String _prodName, double _prodPrice, String _prodDesc)
 	{
 		this._prodID = _prodID;
 		this._prodCat = _prodCat;

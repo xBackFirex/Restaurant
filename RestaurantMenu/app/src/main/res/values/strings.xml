@@ -5,7 +5,7 @@
 
     <!-- TEXT DECLARATIONS -->
     <string name="txtTitle">Restaurant Menu</string>
-    <string name="txtEntryDem">Please enter one valid search term.</string>
+    <string name="txtEntryDem">Please enter a valid item name.</string>
     <string name="txtItemID">Item ID:</string>
     <string name="txtItemCat">Item Category:</string>
     <string name="txtItemName">Item Name:</string>
