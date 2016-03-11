@@ -96,4 +96,41 @@ public class RestDBHandler extends SQLiteOpenHelper
 		db.close();
 		return(restmenuitem);
 	}
+
+	/*
+	public void updateItem(RestMenuItem restmenuitem)
+	{
+
+	}
+	*/
+
+	public boolean deleteItem (String itemName)
+	{
+		boolean result = false;
+
+		String query = "SELECT *"
+						+ " FROM " + TABLE_ITEMS
+						+ " WHERE " + COLUMN_ITEMNAME + " = \"" + itemName + "\"";
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		RestMenuItem restmenuitem = new RestMenuItem();
+
+		if (cursor.moveToFirst())
+		{
+			restmenuitem.set_prodID(Integer.parseInt(cursor.getString(0)));
+
+			db.delete(TABLE_ITEMS,
+						COLUMN_ID + " = ?",
+						new String[]{String.valueOf(restmenuitem.get_prodID())});
+
+			result = true;
+		}
+
+		cursor.close();
+
+		db.close();
+		return result;
+	}
 }

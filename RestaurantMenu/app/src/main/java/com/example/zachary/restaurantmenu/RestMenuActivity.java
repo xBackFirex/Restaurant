@@ -44,7 +44,7 @@ public class RestMenuActivity extends AppCompatActivity
 		String itemCatSelected = itemCat.getSelectedItem().toString();
 		double price = Double.parseDouble(itemPrice.getText().toString());
 
-		if (itemCatSelected == null || itemPrice.getText().toString() == null || itemName.getText().toString() == null || itemDesc.getText().toString() == null)
+		if (itemCatSelected == "Not Assigned" || itemPrice.getText().toString() == "" || itemName.getText().toString() == "" || itemDesc.getText().toString() == "")
 		{
 			Toast.makeText(RestMenuActivity.this, "Please enter values for all fields", Toast.LENGTH_LONG).show();
 		}
@@ -57,11 +57,13 @@ public class RestMenuActivity extends AppCompatActivity
 					itemDesc.getText().toString());
 
 			dbHandler.addItem(restmenuitem);
-			itemID.setText(R.string.notRecAdd);
+			itemID.setText("");
 			itemCat.setSelection(0);
 			itemName.setText("");
 			itemPrice.setText("");
 			itemDesc.setText("");
+
+			Toast.makeText(RestMenuActivity.this, R.string.notRecAdd, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -107,14 +109,39 @@ public class RestMenuActivity extends AppCompatActivity
 		}
 	}
 
+	/*
 	public void updateItem (View view)
 	{
 
 	}
+	*/
 
 	public void deleteItem (View view)
 	{
+		RestDBHandler dbHandler = new RestDBHandler(this, null, null, 1);
 
+		boolean result = dbHandler.deleteItem(itemName.getText().toString());
+
+		if (result)
+		{
+			itemID.setText("");
+			itemCat.setSelection(0);
+			itemName.setText("");
+			itemPrice.setText("");
+			itemDesc.setText("");
+
+			Toast.makeText(RestMenuActivity.this, R.string.notRecDel, Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			itemID.setText("");
+			itemCat.setSelection(0);
+
+			itemPrice.setText("");
+			itemDesc.setText("");
+
+			Toast.makeText(RestMenuActivity.this, R.string.errNMF, Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
