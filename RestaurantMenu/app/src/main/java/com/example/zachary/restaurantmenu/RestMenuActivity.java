@@ -42,28 +42,34 @@ public class RestMenuActivity extends AppCompatActivity
 		RestDBHandler dbHandler = new RestDBHandler(this, null, null, 1);
 
 		String itemCatSelected = itemCat.getSelectedItem().toString();
-		double price = Double.parseDouble(itemPrice.getText().toString());
 
-		if (itemCatSelected == "Not Assigned" || itemPrice.getText().toString() == "" || itemName.getText().toString() == "" || itemDesc.getText().toString() == "")
+		if (itemCatSelected == "Not Assigned" || String.valueOf(itemPrice.getText().toString()) == "" || String.valueOf(itemPrice.getText().toString()) == "Not Assigned" || String.valueOf(itemName.getText().toString()) == "" || String.valueOf(itemName.getText().toString()) == "Not Assigned" || String.valueOf(itemDesc.getText().toString()) == "" || String.valueOf(itemDesc.getText().toString()) == "Not Assigned")
 		{
 			Toast.makeText(RestMenuActivity.this, "Please enter values for all fields", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
-			RestMenuItem restmenuitem = new RestMenuItem(
-					itemCatSelected,
-					itemName.getText().toString(),
-					price,
-					itemDesc.getText().toString());
+			try {
+				double price = Double.parseDouble(itemPrice.getText().toString());
 
-			dbHandler.addItem(restmenuitem);
-			itemID.setText("");
-			itemCat.setSelection(0);
-			itemName.setText("");
-			itemPrice.setText("");
-			itemDesc.setText("");
+				RestMenuItem restmenuitem = new RestMenuItem(
+						itemCatSelected,
+						itemName.getText().toString(),
+						price,
+						itemDesc.getText().toString());
 
-			Toast.makeText(RestMenuActivity.this, R.string.notRecAdd, Toast.LENGTH_LONG).show();
+				dbHandler.addItem(restmenuitem);
+				//itemID.setText("");
+				//itemCat.setSelection(0);
+				//itemName.setText("");
+				//itemPrice.setText("");
+				//itemDesc.setText("");
+
+				Toast.makeText(RestMenuActivity.this, R.string.notRecAdd, Toast.LENGTH_LONG).show();
+			} catch (Exception e)
+			{
+				Toast.makeText(RestMenuActivity.this, "Error adding item, please check values", Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
@@ -132,8 +138,7 @@ public class RestMenuActivity extends AppCompatActivity
 
 			Toast.makeText(RestMenuActivity.this, R.string.notRecDel, Toast.LENGTH_LONG).show();
 		}
-		else
-		{
+		else {
 			itemID.setText("");
 			itemCat.setSelection(0);
 

@@ -31,11 +31,11 @@ public class RestDBHandler extends SQLiteOpenHelper
 	{
 		String CREATE_ITEMS_TABLE = "CREATE TABLE " + TABLE_ITEMS
 				+ " ("
-				+ COLUMN_ID + " INTEGER PRIMARY KEY, "
-				+ COLUMN_ITEMCAT + " TEXT, "
-				+ COLUMN_ITEMNAME + " TEXT, "
-				+ COLUMN_ITEMPRICE + " DOUBLE,"
-				+ COLUMN_ITEMDESC + " TEXT, "
+					+ COLUMN_ID + " INTEGER PRIMARY KEY, "
+					+ COLUMN_ITEMCAT + " TEXT, "
+					+ COLUMN_ITEMNAME + " TEXT, "
+					+ COLUMN_ITEMPRICE + " DOUBLE,"
+					+ COLUMN_ITEMDESC + " TEXT"
 				+ ")";
 
 		db.execSQL(CREATE_ITEMS_TABLE);
