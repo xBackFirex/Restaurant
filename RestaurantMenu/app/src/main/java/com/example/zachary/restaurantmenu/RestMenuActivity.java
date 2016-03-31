@@ -1,5 +1,6 @@
 package com.example.zachary.restaurantmenu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,8 +27,6 @@ public class RestMenuActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_rest_menu);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
 
 		// Set values
 		itemID = (EditText) findViewById(R.id.itemID);
@@ -113,6 +112,12 @@ public class RestMenuActivity extends AppCompatActivity
 		{
 			Toast.makeText(RestMenuActivity.this, R.string.errNMF, Toast.LENGTH_LONG).show();
 		}
+	}
+
+	public void findAllItem (View view)
+	{
+		Intent intent = new Intent(this, ListerActivity.class);
+		startActivity(intent);
 	}
 
 	/*

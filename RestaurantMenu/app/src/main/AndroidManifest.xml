@@ -18,6 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".provider.MyContentProvider"
+            android:authorities="com.example.zachary.restaurantmenu.provider.MyContentProvider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
+
+        <activity
+            android:name=".ListerActivity">
+        </activity>
     </application>
 
 </manifest>

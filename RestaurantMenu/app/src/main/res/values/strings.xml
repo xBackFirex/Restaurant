@@ -36,4 +36,5 @@
         <item>Desserts</item>
         <item>Drinks</item>
     </string-array>
+    <string name="title_activity_lister">ListerActivity</string>
 </resources>

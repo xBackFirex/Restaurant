@@ -1,19 +1,24 @@
 package com.example.zachary.restaurantmenu;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.zachary.restaurantmenu.provider.MyContentProvider;
+
 /**
  * Created by Zachary on 3/9/2016.
  */
 public class RestDBHandler extends SQLiteOpenHelper
 {
+	private ContentResolver myCR;
+
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "restaurantmenu.db";
-	private static final String TABLE_ITEMS = "items";
+	public static final String TABLE_ITEMS = "items";
 
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_ITEMCAT = "_itemCat";
@@ -24,6 +29,7 @@ public class RestDBHandler extends SQLiteOpenHelper
 	public RestDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
 	{
 		super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+		myCR = context.getContentResolver();
 	}
 
 	@Override
@@ -60,20 +66,16 @@ public class RestDBHandler extends SQLiteOpenHelper
 		values.put(COLUMN_ITEMPRICE, restmenuitem.get_prodPrice());
 		values.put(COLUMN_ITEMDESC, restmenuitem.get_prodDesc());
 
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		db.insert(TABLE_ITEMS, null, values);
-		db.close();
+		myCR.insert(MyContentProvider.CONTENT_URI, values);
 	}
 
 	public RestMenuItem findItem(String itemName)
 	{
-		String query = ("SELECT *"
-							+ " FROM " + TABLE_ITEMS
-							+ " WHERE " + COLUMN_ITEMNAME + " = \"" + itemName + "\"");
+		String[] projection = {COLUMN_ID, COLUMN_ITEMCAT, COLUMN_ITEMNAME, COLUMN_ITEMPRICE, COLUMN_ITEMDESC};
 
-		SQLiteDatabase db = getWritableDatabase();
-		Cursor cursor = db.rawQuery(query, null);
+		String selection = COLUMN_ITEMNAME + " = \"" + itemName + "\"";
+
+		Cursor cursor = myCR.query(MyContentProvider.CONTENT_URI, projection, selection, null, null);
 
 		RestMenuItem restmenuitem = new RestMenuItem();
 
@@ -91,10 +93,7 @@ public class RestDBHandler extends SQLiteOpenHelper
 			restmenuitem = null;
 		}
 
-		cursor.close();
-
-		db.close();
-		return(restmenuitem);
+		return restmenuitem;
 	}
 
 	/*
@@ -108,29 +107,14 @@ public class RestDBHandler extends SQLiteOpenHelper
 	{
 		boolean result = false;
 
-		String query = "SELECT *"
-						+ " FROM " + TABLE_ITEMS
-						+ " WHERE " + COLUMN_ITEMNAME + " = \"" + itemName + "\"";
+		String selection = COLUMN_ITEMNAME + " = \"" + itemName + "\"";
 
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor = db.rawQuery(query, null);
+		int rowsDeleted = myCR.delete(MyContentProvider.CONTENT_URI, selection, null);
 
-		RestMenuItem restmenuitem = new RestMenuItem();
-
-		if (cursor.moveToFirst())
+		if (rowsDeleted > 0)
 		{
-			restmenuitem.set_prodID(Integer.parseInt(cursor.getString(0)));
-
-			db.delete(TABLE_ITEMS,
-						COLUMN_ID + " = ?",
-						new String[]{String.valueOf(restmenuitem.get_prodID())});
-
 			result = true;
 		}
-
-		cursor.close();
-
-		db.close();
 		return result;
 	}
 }
