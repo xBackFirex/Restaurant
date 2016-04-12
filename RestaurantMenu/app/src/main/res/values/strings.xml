@@ -26,6 +26,8 @@
     <string name="btnFind">Find</string>
     <string name="btnDelete">Delete</string>
     <string name="btnUpdate">Update</string>
+    <string name="btnFindAll">Find All</string>
+    <string name="btnLoad">Load</string>
 
     <!-- DROP DOWN - CATEGORY - DECLARATIONS -->
     <string-array name="grpCategory">

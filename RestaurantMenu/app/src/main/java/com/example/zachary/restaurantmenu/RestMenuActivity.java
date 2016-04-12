@@ -1,9 +1,11 @@
 package com.example.zachary.restaurantmenu;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class RestMenuActivity extends AppCompatActivity
 {
@@ -34,11 +39,22 @@ public class RestMenuActivity extends AppCompatActivity
 		itemName = (EditText) findViewById(R.id.itemName);
 		itemPrice = (EditText) findViewById(R.id.itemPrice);
 		itemDesc = (EditText) findViewById(R.id.itemDesc);
+
+		IntentFilter mStatusIntentFilter = new IntentFilter(Constants.BROADCAST_ACTION);
+
+		DownloadStateReceiver mDownloadStateReceiver = new DownloadStateReceiver();
+
+		LocalBroadcastManager.getInstance(this).registerReceiver(
+				mDownloadStateReceiver,
+				mStatusIntentFilter
+		);
 	}
 
 	public void addItem (View view)
 	{
 		RestDBHandler dbHandler = new RestDBHandler(this, null, null, 1);
+
+		NumberFormat formatter = new DecimalFormat("#0.00");
 
 		String itemCatSelected = itemCat.getSelectedItem().toString();
 
@@ -78,15 +94,17 @@ public class RestMenuActivity extends AppCompatActivity
 
 		RestMenuItem restmenuitem = dbHandler.findItem(itemName.getText().toString());
 
+		NumberFormat formatter = new DecimalFormat("#0.00");
+
 		if (restmenuitem != null)
 		{
-			itemID.setText(String.valueOf(restmenuitem.get_prodID()));
+			itemID.setText(String.valueOf(restmenuitem.get_itemID()));
 
-			itemName.setText(String.valueOf(restmenuitem.get_prodName()));
-			itemPrice.setText(String.valueOf(restmenuitem.get_prodPrice()));
-			itemDesc.setText(String.valueOf(restmenuitem.get_prodDesc()));
+			itemName.setText(String.valueOf(restmenuitem.get_itemName()));
+			itemPrice.setText(String.valueOf(formatter.format(restmenuitem.get_itemPrice())));
+			itemDesc.setText(String.valueOf(restmenuitem.get_itemDesc()));
 
-			switch (String.valueOf(restmenuitem.get_prodCat()))
+			switch (String.valueOf(restmenuitem.get_itemCat()))
 			{
 				case "Appetizers":
 					itemCat.setSelection(1);
@@ -118,6 +136,12 @@ public class RestMenuActivity extends AppCompatActivity
 	{
 		Intent intent = new Intent(this, ListerActivity.class);
 		startActivity(intent);
+	}
+
+	public void loadItems (View view)
+	{
+		Intent intent = new Intent(this, RestMenuIntentService.class);
+		startService(intent);
 	}
 
 	/*

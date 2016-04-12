@@ -26,6 +26,15 @@ public class RestDBHandler extends SQLiteOpenHelper
 	public static final String COLUMN_ITEMPRICE = "_itemPrice";
 	public static final String COLUMN_ITEMDESC = "_itemDesc";
 
+	public static final String[] PROJECTION =
+			{
+					COLUMN_ID,
+					COLUMN_ITEMCAT,
+					COLUMN_ITEMNAME,
+					COLUMN_ITEMPRICE,
+					COLUMN_ITEMDESC
+			};
+
 	public RestDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
 	{
 		super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -61,10 +70,10 @@ public class RestDBHandler extends SQLiteOpenHelper
 	public void addItem(RestMenuItem restmenuitem)
 	{
 		ContentValues values = new ContentValues();
-		values.put(COLUMN_ITEMCAT, restmenuitem.get_prodCat());
-		values.put(COLUMN_ITEMNAME, restmenuitem.get_prodName());
-		values.put(COLUMN_ITEMPRICE, restmenuitem.get_prodPrice());
-		values.put(COLUMN_ITEMDESC, restmenuitem.get_prodDesc());
+		values.put(COLUMN_ITEMCAT, restmenuitem.get_itemCat());
+		values.put(COLUMN_ITEMNAME, restmenuitem.get_itemName());
+		values.put(COLUMN_ITEMPRICE, restmenuitem.get_itemPrice());
+		values.put(COLUMN_ITEMDESC, restmenuitem.get_itemDesc());
 
 		myCR.insert(MyContentProvider.CONTENT_URI, values);
 	}
@@ -82,11 +91,11 @@ public class RestDBHandler extends SQLiteOpenHelper
 		if (cursor.moveToFirst())
 		{
 			cursor.moveToFirst();
-			restmenuitem.set_prodID(Integer.parseInt(cursor.getString(0)));
-			restmenuitem.set_prodCat(cursor.getString(1));
-			restmenuitem.set_prodName(cursor.getString(2));
-			restmenuitem.set_prodPrice(Double.parseDouble(cursor.getString(3)));
-			restmenuitem.set_prodDesc(cursor.getString(4));
+			restmenuitem.set_itemID(Integer.parseInt(cursor.getString(0)));
+			restmenuitem.set_itemCat(cursor.getString(1));
+			restmenuitem.set_itemName(cursor.getString(2));
+			restmenuitem.set_itemPrice(Double.parseDouble(cursor.getString(3)));
+			restmenuitem.set_itemDesc(cursor.getString(4));
 		}
 		else
 		{

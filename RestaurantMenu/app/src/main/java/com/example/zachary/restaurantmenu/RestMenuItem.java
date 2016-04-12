@@ -6,80 +6,80 @@ package com.example.zachary.restaurantmenu;
  */
 public class RestMenuItem
 {
-	private int _prodID;
-	private String _prodCat;
-	private String _prodName;
-	private double _prodPrice;
-	private String _prodDesc;
+	private int _itemID;
+	private String _itemCat;
+	private String _itemName;
+	private double _itemPrice;
+	private String _itemDesc;
 
 	public RestMenuItem()
 	{
 	}
 
-	public RestMenuItem(String _prodCat, String _prodName, double _prodPrice, String _prodDesc)
+	public RestMenuItem(String _itemCat, String _itemName, double _itemPrice, String _itemDesc)
 	{
-		this._prodCat = _prodCat;
-		this._prodName = _prodName;
-		this._prodPrice = _prodPrice;
-		this._prodDesc = _prodDesc;
+		this._itemCat = _itemCat;
+		this._itemName = _itemName;
+		this._itemPrice = _itemPrice;
+		this._itemDesc = _itemDesc;
 	}
 
-	public RestMenuItem(int _prodID, String _prodCat, String _prodName, double _prodPrice, String _prodDesc)
+	public RestMenuItem(int _itemID, String _itemCat, String _itemName, double _itemPrice, String _itemDesc)
 	{
-		this._prodID = _prodID;
-		this._prodCat = _prodCat;
-		this._prodName = _prodName;
-		this._prodPrice = _prodPrice;
-		this._prodDesc = _prodDesc;
+		this._itemID = _itemID;
+		this._itemCat = _itemCat;
+		this._itemName = _itemName;
+		this._itemPrice = _itemPrice;
+		this._itemDesc = _itemDesc;
 	}
 
-	public int get_prodID()
+	public int get_itemID()
 	{
-		return _prodID;
+		return _itemID;
 	}
 
-	public void set_prodID(int _prodID)
+	public void set_itemID(int _itemID)
 	{
-		this._prodID = _prodID;
+		this._itemID = _itemID;
 	}
 
-	public String get_prodCat()
+	public String get_itemCat()
 	{
-		return _prodCat;
+		return _itemCat;
 	}
 
-	public void set_prodCat(String _prodCat)
+	public void set_itemCat(String _itemCat)
 	{
-		this._prodCat = _prodCat;
+		this._itemCat = _itemCat;
 	}
 
-	public String get_prodName()
+	public String get_itemName()
 	{
-		return _prodName;
+		return _itemName;
 	}
 
-	public void set_prodName(String _prodName)
+	public void set_itemName(String _itemName)
 	{
-		this._prodName = _prodName;
+		this._itemName = _itemName;
 	}
 
-	public double get_prodPrice()
+	public double get_itemPrice()
 	{
-		return _prodPrice;
+		return _itemPrice;
 	}
 
-	public void set_prodPrice(double _prodPrice)
+	public void set_itemPrice(double _itemPrice)
 	{
-		this._prodPrice = _prodPrice;
+		this._itemPrice = _itemPrice;
 	}
 
-	public String get_prodDesc()
+	public String get_itemDesc()
 	{
-		return _prodDesc;
+		return _itemDesc;
 	}
 
-	public void set_prodDesc(String _prodDesc)
+	public void set_itemDesc(String _itemDesc)
 	{
-		this._prodDesc = _prodDesc;
+		this._itemDesc = _itemDesc;
 	}
 }
